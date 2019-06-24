@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>Table V05</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--===============================================================================================-->
+        <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('vendor/animate/animate.css') }}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('vendor/select2/select2.min.css') }}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('vendor/perfect-scrollbar/perfect-scrollbar.css') }}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/util.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
+        <!--===============================================================================================-->
+    </head>
+    <body>
+
+    <div class="limiter">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <div class="table100 ver1">
+                    <div class="table100-firstcol">
+                        <table>
+                            <thead>
+                            <tr class="row100 head">
+                                <th class="cell100 column1">Book</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+
+    {%  for x in articles  %}
+                            <tr class="row100 body">
+                                <td class="cell100 column1">{{ x.title }}</td>
+                            </tr>
+    {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="wrap-table100-nextcols js-pscroll">
+                        <div class="table100-nextcols">
+                            <table>
+                                <thead>
+                                <tr class="row100 head">
+                                    <th class="cell100 column2">Id</th>
+                                    <th class="cell100 column3">Code</th>
+                                    <th class="cell100 column4">Release Date</th>
+                                    <th class="cell100 column5">Description</th>
+                                    <th class="cell100 column6">Price</th>
+                                    <th class="cell100 column7">Author</th>
+                                    <th class="cell100 column8"><em class="fa fa-cog"></em></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+     {% for x in articles %}
+                                <tr class="row100 body">
+                                    <td class="cell100 column2">{{ x.id }}</td>
+                                    <td class="cell100 column3">{{ x.code }}</td>
+                                    {#<td class="cell100 column4">{{ x.dateRelease|date("d/m/Y") }}</td>#}
+                                    <td class="cell100 column4">{{ x.date_release|date("d/m/Y") }}</td>
+                                    <td class="cell100 column5">{{ x.description }}</td>
+                                    <td class="cell100 column6">{{ x.price }}</td>
+                                    <td class="cell100 column7">{{ x.author }}</td>
+                                    <td class="cell100 column8"> <a  href="{{ path('delete_action', { 'id' : x.id }) }}"><i class="fa fa-trash"></i></a> </td>
+
+                                </tr>
+     {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--===============================================================================================-->
+    <script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('vendor/bootstrap/js/popper.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script>
+        $('.js-pscroll').each(function(){
+            var ps = new PerfectScrollbar(this);
+
+            $(window).on('resize', function(){
+                ps.update();
+            })
+
+            $(this).on('ps-x-reach-start', function(){
+                $(this).parent().find('.table100-firstcol').removeClass('shadow-table100-firstcol');
+            });
+
+            $(this).on('ps-scroll-x', function(){
+                $(this).parent().find('.table100-firstcol').addClass('shadow-table100-firstcol');
+            });
+
+        });
+
+
+
+
+    </script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('js/main.js') }}"></script>
+
+    </body>
+    </html>
+
+{% endblock body %}

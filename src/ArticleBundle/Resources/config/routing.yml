@@ -1,0 +1,15 @@
+article_homepage:
+    path:     /
+    defaults: { _controller: ArticleBundle:Default:index }
+new_action:
+    path:     /add
+    defaults: { _controller: ArticleBundle:Default:new  }
+list_action:
+    path:     /list/{user}
+    defaults: { _controller: ArticleBundle:Default:list }
+search_action:
+    path:    /search
+    defaults: { _controller: ArticleBundle:Default:search }
+delete_action:
+    path:    /delete/{id}
+    defaults: { _controller: ArticleBundle:Default:delete }

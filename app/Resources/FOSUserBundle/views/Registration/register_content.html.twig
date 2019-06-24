@@ -1,0 +1,77 @@
+
+    <!DOCTYPE html>
+ <html lang="en" >
+
+ <head>
+     <meta charset="UTF-8">
+     <title>Registration Form</title>
+
+
+     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
+
+     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+
+ </head>
+
+ <body>
+ <div>
+     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+         {#{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+         <a href="{{ path('fos_user_security_logout') }}">
+             {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+         </a>#}
+     {% else %}
+         {#<a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>#}
+
+         {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+         <div class="form-group" id="fos_user_registration_form">
+
+             <div class="login-wrap">
+                 <div class="login-html">
+                     <input id="tab-1" type="radio" name="tab" class="sign-up" checked><label for="tab-1" class="tab">Sign Up</label>
+                     <div class="login-form">
+                         <div class="sign-up-htm">
+                             <div class="group">
+                                 {{ form_row(form.email, { 'attr' : {'class': 'input'}})}}
+                                 {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'form.email'|trans } }) }}
+                                 {{ form_errors(form.email) }}
+                             </div>
+                             <div class="group">
+                                 {{ form_row(form.username, { 'attr' : {'class': 'input'}})}}
+                                 {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'form.username'|trans } }) }}
+                                 {{ form_errors(form.username) }}
+                             </div>
+                             <div class="group">
+                                 {{ form_row(form.plainPassword.first, { 'attr' : {'class': 'input'}})}}
+                                 {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'form.password'|trans } }) }}
+                                 {{ form_errors(form.plainPassword.first) }}
+                             </div>
+                             <div class="group">
+                                 {{ form_row(form.plainPassword.second, { 'attr' : {'class': 'input'}})}}
+                                 {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'form.password_confirmation'|trans } }) }}
+                                 {{ form_errors(form.plainPassword.second) }}
+                             </div>
+                             <div class="group">
+
+                                 <input class="btn btn-lg btn-primary btn-block button" value ="Submit" type="submit" value="{{ 'registration.submit'|trans }}">
+
+                             </div>
+                             <div class="hr"></div>
+                             <div class="foot-lnk">
+                                 <a href="{{ path('fos_user_security_login',{'page' : 'home'}) }}">Already Member?</a>
+                             </div>
+                             {{ form_rest(form) }}
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         {{ form_end(form) }}
+
+     {% endif %}
+
+ </div>
+ </body>
+
+ </html>

@@ -1,0 +1,3 @@
+skander_homepage:
+    path:     /test
+    defaults: { _controller: SkanderBundle:Default:index }
